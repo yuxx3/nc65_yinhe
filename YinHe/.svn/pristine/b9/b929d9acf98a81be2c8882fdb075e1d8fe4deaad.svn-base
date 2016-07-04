@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="gbk"?>
+<module name="uapbd">
+	<public>
+		<!-- 接口 -->
+		<component priority="0" singleton="true" remote="true" tx="CMT" supportAlias="true">
+	      <interface>nc.itf.so.m30.self.ISaleOrderFor5X</interface>
+	      <implementation>nc.impl.so.m30.self.SaleOrderFor5XImpl</implementation>
+	    </component>
+	</public>
+</module>

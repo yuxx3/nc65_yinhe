@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding='gb2312'?>
+<module name="uapbd">
+  <public>
+	<component remote="true" singleton="true"  tx="CMT">
+	  <interface>nc.itf.report.IFreeReport</interface>
+	  <implementation>nc.impl.report.FreeReportImpl</implementation>
+	</component>
+  </public> 
+</module> 

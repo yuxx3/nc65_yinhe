@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean class="nc.ui.pubapp.plugin.action.ReplaceActionInfo">
+		<property name="actionContainer" ref="actionsOfList" />
+		<!-- notedit或edit -->
+		<property name="actionType" value="notedit" />
+		<property name="target" ref="addMenu" />
+		<property name="action" ref="addMenu2" />
+	</bean>
+	<bean class="nc.ui.pubapp.plugin.action.ReplaceActionInfo">
+		<property name="actionContainer" ref="actionsOfCard" />
+		<!-- notedit或edit -->
+		<property name="actionType" value="notedit" />
+		<property name="target" ref="addMenu" />
+		<property name="action" ref="addMenu2" />
+	</bean>
+	<!-- 下拉菜单 -->
+    <!-- 新增菜单  下拉-->
+	<bean id="addMenu2" class="nc.ui.pu.m25.action.InvoiceAddMenuAction" init-method="initUI">
+       <!-- 当前单据的单据类型 -->
+		<property name="billType" value="25" /> 
+		<property name="tooltip">
+		    <bean class="nc.ui.uif2.I18nFB">
+       		  <property name="resDir" value="common"/>
+       		  <property name="resId" value="04004000-0001"/>
+      		  <property name="defaultValue" value="新增业务数据(Ctrl+N)"/>
+     		</bean>
+     	</property>	
+       <!-- 当前单据的所有上游单据的一个全集 -->
+		<property name="actions">
+			<list>
+				<ref bean="addManualAction" />
+				<bean class="nc.funcnode.ui.action.SeparatorAction"/>
+				<ref bean="addFrom55E6Action"/>
+				<ref bean="addFrom21Action" />
+				<ref bean="addFrom45Action" />
+				<ref bean="addFrom61Action" />
+				<ref bean="addFrom50Action" />
+				<ref bean="addFrom47Action" />
+				<ref bean="addFrom4TAction" />
+				<ref bean="add47Action"/>
+			</list>
+		</property>
+		<property name="model" ref="ManageAppModel" />
+	</bean>
+	<!-- 采购发票 参照 委托加工入库 -->
+	<bean id="add47Action" class="nc.ui.comprocess.billref.m25.actions.AddInvoiceAction">
+		<!-- 是否流程单据，如果是流程单据，可以删除 -->
+		<property name="flowBillType" value="false" />
+		<property name="model" ref="manageAppModel" />
+		<property name="processor" ref="transferViewProcessor" />
+		<!-- 来源单据类型编码 -->
+		<property name="sourceBillType" value="47" />
+		<!-- 来源单据类型名称 -->
+		<property name="sourceBillName" value="委托加工入库" />
+	</bean>
+</beans>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<module name="uapbd">
+  <public>
+	<component remote="true" singleton="true"  tx="CMT">
+	  <interface>nc.itf.uapbd.IGdorderMaintain</interface>
+	  <implementation>nc.impl.uapbd.GdorderMaintainImpl</implementation>
+	</component>
+  </public> 
+</module> 

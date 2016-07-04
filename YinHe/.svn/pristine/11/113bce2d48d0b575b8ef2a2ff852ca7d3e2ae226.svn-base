@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><component conRouterType="曼哈顿直角" createIndustry="0" createTime="2016-06-04 14:14:08" creator="YONYOU NC" description="" displayName="pawdcheck" fromSourceBmf="true" gencodestyle="自定义样式" help="" id="5e027799-2237-4a34-8ef8-95ca742942d3" industry="0" industryChanged="false" industryIncrease="false" industryName="" isSource="false" isbizmodel="false" mainEntity="13ef9635-d243-4457-9611-3b5f41df292a" metaType=".bmf" modifier="YONYOU NC" modifyIndustry="0" modifyTime="2016-06-04 14:14:14" name="pawdcheck" namespace="uapbd" ownModule="uapbd" preLoad="false" programcode="0" resModuleName="pawdcheck" resid="" version="2" versionType="0">
+    <celllist>
+        <entity accessorClassName="nc.md.model.access.javamap.POJOStyle" bizItfImpClassName="" componentID="5e027799-2237-4a34-8ef8-95ca742942d3" createIndustry="0" createTime="2016-06-04 14:14:14" creator="YONYOU NC" czlist="" description="" displayName="密码校验" fullClassName="nc.vo.uapbd.pawdcheck.Pawd" height="100" help="" id="13ef9635-d243-4457-9611-3b5f41df292a" industryChanged="false" isAuthen="true" isCreateSQL="true" isExtendBean="false" isPrimary="true" isSource="true" keyAttributeId="0e183b40-f1c7-4030-ab30-297851e673bd" modInfoClassName="" modifier="YONYOU NC" modifyIndustry="0" modifyTime="2016-06-04 14:17:02" name="pawd" resid="" stereoType="" tableName="uapbd_pawd" userDefClassName="" versionType="0" visibility="public" width="100" x="355" y="74">
+            <attributelist>
+                <attribute accessStrategy="" accesspower="false" accesspowergroup="" calculation="false" classID="13ef9635-d243-4457-9611-3b5f41df292a" createIndustry="0" dataType="BS000010000100001051" dataTypeStyle="SINGLE" dbtype="char" defaultValue="" description="" displayName="主键" dynamic="false" dynamicTable="" fieldName="pk_pawd" fieldType="char" fixedLength="false" forLocale="false" help="" id="0e183b40-f1c7-4030-ab30-297851e673bd" industryChanged="false" isActive="true" isAuthorization="true" isDefaultDimensionAttribute="false" isDefaultMeasureAttribute="false" isFeature="false" isGlobalization="false" isHide="false" isKey="true" isNullable="false" isReadOnly="false" isShare="false" isSource="true" length="20" maxValue="" minValue="" modifyIndustry="0" name="pk_pawd" notSerialize="false" precise="" refModelName="" resid="" sequence="0" typeDisplayName="UFID" typeName="UFID" versionType="0" visibility="public"/>
+                <attribute accessStrategy="" accesspower="false" accesspowergroup="" calculation="false" classID="13ef9635-d243-4457-9611-3b5f41df292a" createIndustry="0" dataType="BS000010000100001001" dataTypeStyle="SINGLE" dbtype="varchar" defaultValue="" description="" displayName="密码" dynamic="false" dynamicTable="" fieldName="pawd" fieldType="varchar" fixedLength="false" forLocale="false" help="" id="f7a5cf93-5942-4613-ad4e-4ebb828bd4cd" industryChanged="false" isActive="true" isAuthorization="true" isDefaultDimensionAttribute="false" isDefaultMeasureAttribute="false" isFeature="false" isGlobalization="false" isHide="false" isKey="false" isNullable="false" isReadOnly="false" isShare="false" isSource="true" length="50" maxValue="" minValue="" modifyIndustry="0" name="pawd" notSerialize="false" precise="" refModelName="" resid="" sequence="1" typeDisplayName="String" typeName="String" versionType="0" visibility="public"/>
+            </attributelist>
+            <operationlist/>
+            <busiitfs/>
+            <busimaps/>
+            <canzhaolist/>
+            <accessor classFullname="nc.md.model.access.javamap.POJOStyle" displayName="POJO" name="pojo">
+                <properties/>
+            </accessor>
+        </entity>
+    </celllist>
+    <connectlist/>
+    <refdepends/>
+    <refdependLoseIDs/>
+    <cellRemoveLog/>
+    <rulers>
+        <ruler isHorizontal="true" unit="0">
+            <guideList/>
+        </ruler>
+        <ruler isHorizontal="false" unit="0">
+            <guideList/>
+        </ruler>
+    </rulers>
+</component>

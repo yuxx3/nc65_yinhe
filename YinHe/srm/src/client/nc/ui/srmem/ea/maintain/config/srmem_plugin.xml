@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean class="nc.ui.pubapp.plugin.action.ReplaceActionInfo">
+		<property name="actionContainer" ref="actionsOfList" />
+		<!-- notedit或edit -->
+		<property name="actionType" value="notedit" />
+		<property name="target" ref="addMenu" />
+		<property name="action" ref="addMenu2" />
+	</bean>
+	<bean class="nc.ui.pubapp.plugin.action.ReplaceActionInfo">
+		<property name="actionContainer" ref="actionsOfCard" />
+		<!-- notedit或edit -->
+		<property name="actionType" value="notedit" />
+		<property name="target" ref="addMenu" />
+		<property name="action" ref="addMenu2" />
+	</bean>
+		<!-- 新增菜单 -->
+	<bean id="addMenu2" class="nc.ui.pubapp.uif2app.actions.AddMenuAction"
+		init-method="initUI">
+		<!-- 当前单据的单据类型 -->
+		<property name="billType" value="4S21" />
+		<property name="tooltip"> 
+		    <bean class="nc.ui.uif2.I18nFB">
+       		  <property name="resDir" value="common"/>
+       		  <property name="resId" value="04004000-0001"/>
+      		  <property name="defaultValue" value="新增业务数据(Ctrl+N)"/>
+     		</bean>
+     	</property>	
+		<!-- 当前单据的所有上游单据的一个全集 -->
+		<property name="actions">
+			<list>
+				<ref bean="addManualAction" />
+				<ref bean="separatorAction" />
+				<ref bean="addFrom21Action" />
+				<!-- 扩展拉单-库存采购入库 -->
+				<ref bean="addFrom45Action"/>
+				<ref bean="addFromZ2Action" />
+				<ref bean="addFrom4S12Action"/>
+			</list>
+		</property>
+		<property name="model" ref="manageAppModel" />
+		<property name="pfAddInfoLoader" ref="pfAddInfoLoader" />
+	</bean>
+	<bean id="addFrom45Action" class="nc.ui.to.scm45.billref.srm4s.actions.addFrom45Action">
+		<!-- 来源单据类型编码 -->
+		<property name="sourceBillType" value="45" />
+		<!-- 来源单据类型名称 -->
+		<property name="sourceBillName" value="库存采购入库" />
+		<!-- 是否流程单据，如果是流程单据，可以删除 -->
+		<property name="flowBillType" value="false" />
+		<property name="model" ref="manageAppModel" />
+		<property name="editor" ref="billForm" />
+		<property name="transferViewProcessor" ref="transferBillViewProcessor" />
+	</bean>
+</beans>

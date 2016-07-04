@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="gbk"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="general" class="nc.pubapp.pade.code.funnode.FunNodePara">
+        <property name="moduleName" value="uapbd" />
+	    <property name="bpfPath" value="test.bpf"/>
+	    <property name="funcode" value="50081002"/>
+	    <property name="clientPackName" value="nc.ui.uapbd.orderarearela"/>
+			    <property name="metaData" value="mm\METADATA\orderarearela.bmf"/>
+	    <property name="xmlPath" value="mm\src\client\nc\ui\uapbd\orderarearela\ace\view\Orderarearela_config.xml"/>
+	    <property name="metaDataType" value="singleType" />
+		<property name="funcregispath" value="mm/designmodel/funcmodel/orderarearela/funcregis/50081002.func" />
+		<property name="quetempath" value="${quetempath}" />
+		<property name="printtempath" value="${printtempath}" />
+		<property name="systembasepath" value="mm/designmodel/systemplatebase/orderarearela/50081002/50081002.stb" />
+		<property name="extendSuffix" value=""/>
+		<property name="uif2ModelFilePath" value="mm\designmodel\ace\uif2model\50081002.umf"/>
+		<property name="busiCompName" value="mm"/>
+		<property name="metaDataId" value="258df22e-0459-4bba-b050-f631eb95104f"/>
+	</bean>
+
+	<bean id="templet" class="nc.pubapp.pade.code.funnode.Templet">
+		<property name="tempStyle" value="1" />
+		<property name="nodeKey" value="" />
+		<property name="templetPath" value="mm/designmodel/templet/orderarearela/billtemplet/50081002.btf" />
+	</bean>
+	
+	<bean id="FilePackNameBean" class="nc.pubapp.pade.code.engine.FilePackNamePara">
+		<property name="filePackNameList">
+			 <list>
+				  <value>nc.ui.uapbd.orderarearela.action.OrderarearelaAddLineAction.java</value>
+				  <value>nc.ui.uapbd.orderarearela.handler.BodyAfterEditHandler.java</value>
+				  <value>nc.ui.uapbd.orderarearela.handler.BodyBeforeEditHandler.java</value>
+			 </list>
+		</property>
+	</bean>
+
+</beans>

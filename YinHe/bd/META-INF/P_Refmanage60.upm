@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding='gb2312'?>
+<module name="uapbd">
+  <public>
+	<component remote="true" singleton="true"  tx="CMT">
+	  <interface>nc.itf.uapbd.IRefmanageMaintain</interface>
+	  <implementation>nc.impl.uapbd.RefmanageMaintainImpl</implementation>
+	</component>
+	<component remote="true" singleton="true"  tx="CMT">
+	  <interface>nc.itf.uapbd.IDataSych</interface>
+	  <implementation>nc.impl.uapbd.DataSychImpl</implementation>
+	</component>
+  </public> 
+</module> 

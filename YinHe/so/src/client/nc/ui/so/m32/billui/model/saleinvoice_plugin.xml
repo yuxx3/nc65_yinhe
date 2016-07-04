@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean class="nc.ui.pubapp.plugin.action.ReplaceActionInfo">
+		<property name="actionContainer" ref="actionsOfList" />
+		<!-- notedit或edit -->
+		<property name="actionType" value="notedit" />
+		<property name="target" ref="addMenuAction" />
+		<property name="action" ref="addMenuAction2" />
+	</bean>
+	<bean class="nc.ui.pubapp.plugin.action.ReplaceActionInfo">
+		<property name="actionContainer" ref="actionsOfCard" />
+		<!-- notedit或edit -->
+		<property name="actionType" value="notedit" />
+		<property name="target" ref="addMenuAction" />
+		<property name="action" ref="addMenuAction2" />
+	</bean>
+	<!-- 新增菜单 -->
+	<bean id="addMenuAction2" class="nc.ui.pubapp.uif2app.actions.AddMenuAction"
+		init-method="initUI">
+		<!-- 当前单据的单据类型 -->
+		<property name="billType" value="32" />
+		<!-- 当前单据的所有上游单据的一个全集 -->
+		<property name="actions">
+			<list>
+				<ref bean="refOrderAction" />
+				<ref bean="refOutAction" />
+				<ref bean="addFrom40Action" />
+			</list>
+		</property>
+		<property name="pfAddInfoLoader" ref="pfAddInfoLoader"></property>
+		<property name="model" ref="manageAppModel" />
+	</bean>
+	<!-- 销售发票拉销售发货单 -->
+	<bean id="addFrom40Action" class="nc.ui.so.m32.m40.action.addFrom40Action">
+		<!-- 是否流程单据，如果是流程单据，可以删除 -->
+		<property name="flowBillType" value="false" />
+		<property name="model" ref="ManageAppModel" />
+		<property name="editor" ref="billFormEditor" />
+		<property name="transferViewProcessor" ref="transferViewProcessor" />
+		<!-- 来源单据类型编码 -->
+		<property name="sourceBillType" value="4331" />
+		<!-- 来源单据类型名称 -->
+		<property name="sourceBillName" value="销售发货单" />
+	</bean>
+</beans>

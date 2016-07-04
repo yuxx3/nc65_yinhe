@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="gbk"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="general" class="nc.pubapp.pade.code.funnode.FunNodePara">
+        <property name="moduleName" value="uapbd" />
+	    <property name="bpfPath" value="test.bpf"/>
+	    <property name="funcode" value="10140REF"/>
+	    <property name="clientPackName" value="nc.ui.uapbd.refmanage"/>
+			    <property name="metaData" value="bd\METADATA\refmanage.bmf"/>
+	    <property name="xmlPath" value="bd\src\client\nc\ui\uapbd\refmanage\ace\view\Refmanage_config.xml"/>
+	    <property name="metaDataType" value="singleType" />
+		<property name="funcregispath" value="bd/designmodel/funcmodel/refmanage/funcregis/10140REF.func" />
+		<property name="quetempath" value="${quetempath}" />
+		<property name="printtempath" value="${printtempath}" />
+		<property name="systembasepath" value="bd/designmodel/systemplatebase/refmanage/10140REF/10140REF.stb" />
+		<property name="extendSuffix" value=""/>
+		<property name="uif2ModelFilePath" value="bd\designmodel\ace\uif2model\10140REF.umf"/>
+		<property name="busiCompName" value="bd"/>
+		<property name="metaDataId" value="d6012e13-761a-498f-8fe2-214d0de4c5f2"/>
+	</bean>
+
+	<bean id="templet" class="nc.pubapp.pade.code.funnode.Templet">
+		<property name="tempStyle" value="1" />
+		<property name="nodeKey" value="" />
+		<property name="templetPath" value="bd/designmodel/templet/refmanage/billtemplet/10140REF.btf" />
+	</bean>
+	
+	<bean id="FilePackNameBean" class="nc.pubapp.pade.code.engine.FilePackNamePara">
+		<property name="filePackNameList">
+			 <list>
+				  <value>nc.ui.uapbd.refmanage.action.RefmanageAddLineAction.java</value>
+				  <value>nc.ui.uapbd.refmanage.handler.BodyAfterEditHandler.java</value>
+				  <value>nc.ui.uapbd.refmanage.handler.BodyBeforeEditHandler.java</value>
+			 </list>
+		</property>
+	</bean>
+
+</beans>
