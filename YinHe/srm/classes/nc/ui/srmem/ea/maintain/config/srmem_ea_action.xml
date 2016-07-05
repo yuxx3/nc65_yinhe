@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!-- 评估申请单 action 配置文件 -->
+<beans>
+
+	<!-- 卡片, 列表动作设置 -->
+	<bean id="toftpanelActionContributors" class="nc.ui.uif2.actions.ActionContributors">
+		<property name="contributors">
+			<list>
+				<ref bean="actionsOfList" />
+				<ref bean="actionsOfCard" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 构造方法中传入的界面显示时，配置的Action才可见 -->
+	<bean id="actionsOfList" class="nc.ui.uif2.actions.StandAloneToftPanelActionContainer">
+		<constructor-arg ref="listView" />
+		<property name="actions">
+			<list>
+				<ref bean="addMenu" />
+				<ref bean="editAction" />
+				<ref bean="deleteAction" />
+				<ref bean="copyAction" />
+				<ref bean="separatorAction" />
+
+				<ref bean="queryAction" />
+				<ref bean="refreshAction" />
+				<ref bean="separatorAction" />
+
+				<ref bean="submitMenuAction" />
+				<ref bean="approveMenuAction" />
+				<ref bean="distriMenuAction" />
+				<ref bean="rejectApproveAction" />
+				<ref bean="separatorAction" />
+
+				<ref bean="linkQueryGroup" />
+				<ref bean="separatorAction" />
+
+				<ref bean="printGroup" />
+				<ref bean="separatorAction" />
+			</list>
+		</property>
+		<property name="model" ref="manageAppModel" />
+	</bean>
+
+	<!-- 构造方法中传入的界面显示时，配置的Action才可见 -->
+	<bean id="actionsOfCard" class="nc.ui.uif2.actions.StandAloneToftPanelActionContainer">
+		<constructor-arg ref="billForm" />
+		<property name="actions">
+			<list>
+				<ref bean="addMenu" />
+				<ref bean="editAction" />
+				<ref bean="deleteAction" />
+				<ref bean="copyAction" />
+				<ref bean="separatorAction" />
+
+				<ref bean="queryAction" />
+				<ref bean="refreshCardAction" />
+				<ref bean="separatorAction" />
+
+				<ref bean="submitMenuAction" />
+				<ref bean="approveMenuAction" />
+				<ref bean="distriMenuAction" />
+				<ref bean="rejectApproveAction" />
+				<ref bean="separatorAction" />
+
+				<ref bean="linkQueryGroup" />
+				<ref bean="separatorAction" />
+
+				<ref bean="printGroup" />
+				<ref bean="separatorAction" />
+			</list>
+		</property>
+		<property name="editActions">
+			<list>
+				<ref bean="saveAction" />
+				<ref bean="saveApproveAction" />
+				<ref bean="separatorAction" />
+				<ref bean="cancelAction" />
+			</list>
+		</property>
+		<property name="model" ref="manageAppModel" />
+	</bean>
+
+
+	<!-- 新增菜单 -->
+	<bean id="addMenu" class="nc.ui.pubapp.uif2app.actions.AddMenuAction"
+		init-method="initUI">
+		<!-- 当前单据的单据类型 -->
+		<property name="billType" value="4S21" />
+		<property name="tooltip"> 
+		    <bean class="nc.ui.uif2.I18nFB">
+       		  <property name="resDir" value="common"/>
+       		  <property name="resId" value="04004000-0001"/>
+      		  <property name="defaultValue" value="新增业务数据(Ctrl+N)"/>
+     		</bean>
+     	</property>	
+		<!-- 当前单据的所有上游单据的一个全集 -->
+		<property name="actions">
+			<list>
+				<ref bean="addManualAction" />
+				<ref bean="separatorAction" />
+				<ref bean="addFrom21Action" />
+				<ref bean="addFromZ2Action" />
+				<ref bean="addFrom4S12Action"/>
+			</list>
+		</property>
+		<property name="model" ref="manageAppModel" />
+		<property name="pfAddInfoLoader" ref="pfAddInfoLoader" />
+	</bean>
+
+	<!-- "新增"下拉菜单的信息加载bean -->
+	<bean id="pfAddInfoLoader" class="nc.ui.pubapp.uif2app.actions.PfAddInfoLoader">
+		<property name="billType" value="4S21" />
+		<property name="model" ref="manageAppModel" />
+	</bean>
+
+	<!-- 自制新增 -->
+	<bean id="addManualAction"
+		class="nc.ui.srmem.ea.maintain.action.maintain.EaAddManualAction">
+		<property name="btnName" >
+				<bean class="nc.ui.uif2.I18nFB">
+				<property name="resDir" value="4s20100_0" />
+				<property name="defaultValue" value="自制" />
+				<property name="resId" value="04S20100-0138" />
+			</bean>
+			</property>
+		<property name="model" ref="manageAppModel" />
+		<property name="editor" ref="billForm" />
+		<!-- 使用UE新增模板时下面的行要注释掉 -->
+		<property name="interceptor">
+			<bean
+				class="nc.ui.pubapp.uif2app.actions.interceptor.CompositeActionInterceptor">
+				<property name="interceptors">
+					<list>
+						<bean
+							class="nc.ui.pubapp.uif2app.actions.interceptor.ShowUpComponentInterceptor">
+							<property name="showUpComponent" ref="billForm" />
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- 参照采购订单新增 -->
+	<bean id="addFrom21Action"
+		class="nc.ui.srmem.ea.maintain.action.maintain.EaAddFromPurchaseOrderAction">
+		<!-- 来源单据类型编码 -->
+		<property name="sourceBillType" value="21" />
+		<!-- 来源单据类型名称 -->
+		<property name="sourceBillName" value="采购订单" />
+		<!-- 是否流程单据，如果是流程单据，可以删除 -->
+		<property name="flowBillType" value="false" />
+		<property name="model" ref="manageAppModel" />
+		<!-- 保留注释UE新增模板 -->
+		<!--<property name="editor" ref="billFormEditor_Add" /> -->
+		<property name="editor" ref="billForm" />
+		<property name="transferViewProcessor" ref="transferBillViewProcessor" />
+	</bean>
+
+	<!-- 参照采购合同新增 -->
+	<bean id="addFromZ2Action"
+		class="nc.ui.srmem.ea.maintain.action.maintain.EaAddFromContratAction">
+		<!-- 来源单据类型编码 -->
+		<property name="sourceBillType" value="Z2" />
+		<!-- 来源单据类型名称 -->
+		<property name="sourceBillName" value="采购合同" />
+		<!-- 是否流程单据，如果是流程单据，可以删除 -->
+		<property name="flowBillType" value="false" />
+		<property name="model" ref="manageAppModel" />
+		<!-- 保留注释UE新增模板 -->
+		<!--<property name="editor" ref="billFormEditor_Add" /> -->
+		<property name="editor" ref="billForm" />
+		<property name="transferViewProcessor" ref="transferBillViewProcessor" />
+	</bean>
+	
+	<!-- 参照供应商准入申请新增 -->
+	<bean id="addFrom4S12Action"
+		class="nc.ui.srmem.ea.maintain.action.maintain.EaAddFromSupEnterAction">
+		<!-- 来源单据类型编码 -->
+		<property name="sourceBillType" value="4S12" />
+		<!-- 来源单据类型名称 -->
+		<property name="sourceBillName" value="供应商准入申请" />
+		<!-- 是否流程单据，如果是流程单据，可以删除 -->
+		<property name="flowBillType" value="false" />
+		<property name="model" ref="manageAppModel" />
+		<!-- 保留注释UE新增模板 -->
+		<!--<property name="editor" ref="billFormEditor_Add" /> -->
+		<property name="editor" ref="billForm" />
+		<property name="transferViewProcessor" ref="transferBillViewProcessor" />
+	</bean>
+
+	<bean id="transferBillViewProcessor" class="nc.ui.pubapp.billref.dest.TransferViewProcessor">
+		<property name="list" ref="listView" />
+		<property name="actionContainer" ref="actionsOfList" />
+		<!-- 保留注释UE新增模板 -->
+		<!--<property name="billForm" ref="billFormEditor_Add" /> -->
+		<property name="cardActionContainer" ref="actionsOfCard" />
+		<property name="saveAction" ref="saveAction" />
+		<property name="cancelAction" ref="cancelAction" />
+		<property name="billForm" ref="billForm" />
+		<property name="transferLogic">
+			<bean class="nc.ui.pubapp.billref.dest.DefaultBillDataLogic">
+				<!-- 保留注释UE新增模板 -->
+				<!--<property name="billForm" ref="billFormEditor_Add" /> -->
+				<property name="billForm" ref="billForm" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="editAction" class="nc.ui.srmem.ea.maintain.action.maintain.EaEditAction">
+		<property name="model" ref="manageAppModel" />
+		<property name="editor" ref="billForm" />
+		<property name="powercheck" value="true"></property>
+		<property name="permissioncode" value="4S21"></property>
+		<property name="interceptor" ref="billFormShowUpComponentInterceptor" />
+	</bean>
+
+	<bean id="saveAction" class="nc.ui.srmem.ea.maintain.action.maintain.EaSaveAction">
+		<property name="model" ref="manageAppModel" />
+		<property name="editor" ref="billForm" />
+	</bean>
+
+	<bean id="copyAction" class="nc.ui.pubapp.uif2app.actions.CopyAction">
+		<property name="model" ref="manageAppModel" />
+		<property name="interceptor" ref="billFormShowUpComponentInterceptor" />
+		<property name="editor" ref="billForm" />
+		<property name="copyActionProcessor" ref="copyActionActionProcessor" />
+	</bean>
+
+	<bean id="copyActionActionProcessor"
+		class="nc.ui.srmem.ea.maintain.action.maintain.EaCopyActionProcessor">
+	<property name="editor" ref="billForm" />
+	</bean>
+
+	<bean id="deleteAction" class="nc.ui.srmem.ea.maintain.action.maintain.EaDelAction">
+		<property name="model" ref="manageAppModel" />
+		<property name="singleBillView" ref="billForm" />
+		<property name="powercheck" value="true" />
+		<property name="permissioncode" value="4S21" />
+		<property name="singleBillService" ref="serviceProxy" />
+	</bean>
+
+	<bean id="cancelAction" class="nc.ui.srmem.ea.maintain.action.maintain.EaCancelAction">
+		<property name="editor" ref="billForm" />
+		<property name="model" ref="manageAppModel" />
+	</bean>
+
+	<bean id="refreshAction" class="nc.ui.pubapp.uif2app.query2.action.DefaultRefreshAction">
+		<property name="model" ref="manageAppModel" />
+		<property name="dataManager" ref="modelDataManager" />
+		<property name="interceptor" ref="listViewShowUpComponentInterceptor" />
+	</bean>
+
+	<bean id="refreshCardAction" class="nc.ui.pubapp.uif2app.actions.RefreshSingleAction">
+		<property name="model" ref="manageAppModel" />
+	</bean>
+
+	<bean id="linkQueryGroup" class="nc.funcnode.ui.action.MenuAction">
+		<property name="code" value="linkGroup" />
+		<property name="name" >
+			<bean class="nc.ui.uif2.I18nFB">
+				<property name="resDir" value="4s20100_0" />
+				<property name="defaultValue" value="联查" />
+				<property name="resId" value="04S20100-0137" />
+			</bean>
+			</property>
+		<property name="actions">
+			<list>
+				<ref bean="linkQueryAction" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="linkQueryAction" class="nc.scmmm.ui.uif2.actions.SCMLinkQueryAction">
+		<property name="model" ref="manageAppModel" />
+		<property name="billType" value="4S21" />
+	</bean>
+
+	<bean id="printGroup" class="nc.funcnode.ui.action.GroupAction">
+		<property name="code" value="printGroup" />
+		<property name="name" value="打印" />
+		<property name="tooltip" value="打印(Alt+P)" />
+		<property name="actions">
+			<list>
+				<ref bean="printAction" />
+				<ref bean="preViewAction" />
+				<ref bean="outputAction" />
+				<ref bean="separatorAction" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="preViewAction" class="nc.ui.pubapp.uif2app.actions.MetaDataBasedPrintAction">
+		<property name="preview" value="true" />
+		<property name="model" ref="manageAppModel" />
+		<property name="beforePrintDataProcess" ref="printProcessor" />
+	</bean>
+
+	<bean id="printAction" class="nc.ui.pubapp.uif2app.actions.MetaDataBasedPrintAction">
+		<property name="preview" value="false" />
+		<property name="model" ref="manageAppModel" />
+		<property name="beforePrintDataProcess" ref="printProcessor" />
+	</bean>
+	
+	<!-- 打印前处理 -->
+	<bean id="printProcessor" class="nc.ui.srmem.ea.maintain.action.maintain.EaPrintActionProcessor">
+		<property name="model" ref="manageAppModel" />
+	</bean>
+
+	<bean id="outputAction" class="nc.ui.pubapp.uif2app.actions.OutputAction">
+		<property name="model" ref="manageAppModel" />
+		<property name="parent" ref="billForm" />
+		<property name="beforePrintDataProcess" ref="printProcessor" />
+	</bean>
+
+	<bean id="queryAction" class="nc.ui.pubapp.uif2app.query2.action.DefaultQueryAction">
+		<property name="model" ref="manageAppModel" />
+		<property name="dataManager" ref="modelDataManager" />
+		<property name="qryCondDLGInitializer" ref="qryCondDLGInitializer" />
+		<property name="showUpComponent" ref="listView" />
+		<property name="templateContainer" ref="queryTemplateContainer" />
+	</bean>
+
+	<bean id="bodyseparatorAction" class="nc.ui.pub.beans.ActionsBar$ActionsBarSeparator" />
+
+	<bean id="separatorAction" class="nc.funcnode.ui.action.SeparatorAction" />
+
+	<!-- 提交菜单 -->
+	<bean id="submitMenuAction" class="nc.funcnode.ui.action.GroupAction">
+		<property name="code" value="submitMenuAction" />
+		<property name="name">
+			<bean class="nc.ui.uif2.I18nFB">
+				<property name="resDir" value="4008001_0" />
+				<property name="resId" value="04008001-0736" />
+				<property name="defaultValue" value="提交" />
+			</bean>
+		</property>
+		<property name="actions">
+			<list>
+				<ref bean="commitAction" />
+				<ref bean="unCommitAction" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 审批菜单 -->
+	<bean id="approveMenuAction" class="nc.funcnode.ui.action.GroupAction">
+		<property name="code" value="approveMenuAction" />
+		<property name="name">
+			<bean class="nc.ui.uif2.I18nFB">
+				<property name="resDir" value="4008001_0" />
+				<property name="resId" value="04008001-0737" />
+				<property name="defaultValue" value="审批" />
+			</bean>
+		</property>
+		<property name="actions">
+			<list>
+				<ref bean="approveAction" />
+				<ref bean="unApproveAction" />
+				<ref bean="separatorAction" />
+				<ref bean="approvingStatusAction" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 提交 -->
+	<bean id="commitAction" class="nc.ui.srmem.ea.maintain.action.approve.CommitAction">
+		<property name="model" ref="manageAppModel" />
+		<property name="editor" ref="billForm" />
+		<property name="preActionNames">
+			<list>
+				<value>SAVEBASE</value>
+			</list>
+		</property>
+		<property name="actionName" value="SAVE" />
+		<property name="billType" value="4S21" />
+		<property name="filledUpInFlow" value="true" />
+	</bean>
+
+	<!-- 收回 -->
+	<bean id="unCommitAction" class="nc.ui.srmem.ea.maintain.action.approve.UnCommitAction">
+		<property name="model" ref="manageAppModel" />
+		<property name="editor" ref="billForm" />
+		<property name="actionName" value="UNSAVE" />
+		<property name="billType" value="4S21" />
+		<property name="filledUpInFlow" value="true" />
+	</bean>
+
+	<!-- 审批 -->
+	<bean id="approveAction" class="nc.ui.srmem.ea.maintain.action.approve.ApproveAction">
+		<property name="model" ref="manageAppModel" />
+		<property name="editor" ref="billForm" />
+		<property name="actionName" value="APPROVE" />
+		<property name="billType" value="4S21" />
+		<property name="filledUpInFlow" value="true" />
+		<property name="validationService" ref="approvepowervalidservice" />
+	</bean>
+
+	<!-- 取消审批 -->
+	<bean id="unApproveAction" class="nc.ui.srmem.ea.maintain.action.approve.UnApproveAction">
+		<property name="model" ref="manageAppModel" />
+		<property name="editor" ref="billForm" />
+		<property name="actionName" value="UNAPPROVE" />
+		<property name="billType" value="4S21" />
+		<property name="filledUpInFlow" value="true" />
+		<property name="validationService" ref="unapprovepowervalidservice" />
+	</bean>
+
+	<!-- 审批流状态 -->
+	<bean id="approvingStatusAction"
+		class="nc.ui.pubapp.uif2app.actions.pflow.PFApproveStatusInfoAction">
+		<property name="model" ref="manageAppModel" />
+		<property name="editor" ref="billForm" />
+		<property name="billType" value="4S21" />
+	</bean>
+
+	<bean id="approvepowervalidservice" class="nc.ui.pubapp.pub.power.PowerValidateService">
+		<property name="actionCode" value="approve" />
+		<property name="billCodeFiledName" value="vbillcode" />
+		<property name="permissionCode" value="4S21" />
+	</bean>
+	
+	<bean id="unapprovepowervalidservice" class="nc.ui.pubapp.pub.power.PowerValidateService">
+		<property name="actionCode" value="unapprove" />
+		<property name="billCodeFiledName" value="vbillcode" />
+		<property name="permissionCode" value="4S21" />
+	</bean>
+
+	<!-- 发布菜单 -->
+	<bean id="distriMenuAction"
+		class="nc.ui.srmem.ea.maintain.action.maintain.EaDistriMenuAction">
+		<property name="code" value="distriMenuAction" />
+		<property name="name" >
+			<bean class="nc.ui.uif2.I18nFB">
+				<property name="resDir" value="4s20100_0" />
+				<property name="defaultValue" value="发布" />
+				<property name="resId" value="04S20100-0016" />
+			</bean>
+			</property>
+		<property name="actions">
+			<list>
+				<ref bean="distriEstiApplyAction" />
+				<ref bean="unDistriEstiApplyAction" />
+				<ref bean="distriEstiTableAction" />
+				<ref bean="unDistriEstiTableAction" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 下发评估申请单 -->
+	<bean id="distriEstiApplyAction"
+		class="nc.ui.srmem.ea.maintain.action.maintain.EaDistriEstiApplyAction">
+		<property name="editor" ref="billForm" />
+		<property name="model" ref="manageAppModel" />
+	</bean>
+
+	<!-- 取消下发评估申请单 -->
+	<bean id="unDistriEstiApplyAction"
+		class="nc.ui.srmem.ea.maintain.action.maintain.EaUnDistriEstiApplyAction">
+		<property name="editor" ref="billForm" />
+		<property name="model" ref="manageAppModel" />
+	</bean>
+
+	<!-- 发布评估表 -->
+	<bean id="distriEstiTableAction"
+		class="nc.ui.srmem.ea.maintain.action.maintain.EaDistriEstiTableAction">
+		<property name="editor" ref="billForm" />
+		<property name="model" ref="manageAppModel" />
+	</bean>
+
+	<!-- 取消发布评估表 -->
+	<bean id="unDistriEstiTableAction"
+		class="nc.ui.srmem.ea.maintain.action.maintain.EaUnDistriEstiTableAction">
+		<property name="editor" ref="billForm" />
+		<property name="model" ref="manageAppModel" />
+		<property name="refreshCardAction" ref="refreshCardAction" />
+	</bean>
+
+	<!-- 拒评 -->
+	<bean id="rejectApproveAction"
+		class="nc.ui.srmem.ea.maintain.action.maintain.EaRejectApproveAction">
+		<property name="editor" ref="billForm" />
+		<property name="model" ref="manageAppModel" />
+	</bean>
+
+	<!-- 保存提交 -->
+	<bean id="saveApproveAction"
+		class="nc.ui.pubapp.uif2app.actions.pflow.SaveAndCommitScriptAction">
+		<constructor-arg>
+			<ref bean="saveAction" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="commitAction" />
+		</constructor-arg>
+		<property name="model" ref="manageAppModel" />
+		<property name="btnName">
+			<bean class="nc.ui.uif2.I18nFB">
+				<property name="resDir" value="common" />
+				<property name="resId" value="2SCMPUB-000027" />
+				<property name="defaultValue" value="保存提交" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="cardInfoPnl"
+		class="nc.ui.pubapp.uif2app.tangramlayout.UECardLayoutToolbarPanel">
+		<property name="actions">
+			<list>
+				<!-- 浏览按钮 卡片界面共享信息按钮 -->
+				<bean id="firstLineAction" class="nc.ui.uif2.actions.FirstLineAction">
+					<property name="model" ref="manageAppModel" />
+				</bean>
+				<bean id="preLineAction" class="nc.ui.uif2.actions.PreLineAction">
+					<property name="model" ref="manageAppModel" />
+				</bean>
+				<bean id="nextLineAction" class="nc.ui.uif2.actions.NextLineAction">
+					<property name="model" ref="manageAppModel" />
+				</bean>
+				<bean id="lastLineAction" class="nc.ui.uif2.actions.LastLineAction">
+					<property name="model" ref="manageAppModel" />
+				</bean>
+			</list>
+		</property>
+		<property name="titleAction">
+			<bean id="returnaction" class="nc.ui.pubapp.uif2app.actions.UEReturnAction">
+				<property name="goComponent" ref="listView" />
+				<property name="saveAction" ref="saveAction" />
+				<property name="model" ref="manageAppModel" />
+			</bean>
+		</property>
+		<property name="model" ref="manageAppModel" />
+		<property name="rightExActions">
+			<list>
+				<bean class="nc.ui.pub.beans.ActionsBar$ActionsBarSeparator" />
+				<bean id="headZoomAction" class="nc.ui.pubapp.uif2app.actions.DefaultHeadZoomAction">
+					<property name="billForm" ref="billForm" />
+					<property name="model" ref="manageAppModel" />
+					<property name="pos" value="0" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 评估对象页签 单据表体行菜单按钮动作 -->
+	<bean id="vabodyInsertLineAction" class="nc.ui.pubapp.uif2app.actions.BodyInsertLineAction" />
+	<bean id="vabodyAddLineAction" class="nc.ui.pubapp.uif2app.actions.BodyAddLineAction">
+		<property name="model" ref="manageAppModel" />
+	</bean>
+	<bean id="vabodyCopyLineAction" class="nc.ui.pubapp.uif2app.actions.BodyCopyLineAction">
+		<property name="model" ref="manageAppModel" />
+	</bean>	
+	<bean id="vabodyDelLineAction"
+		class="nc.ui.srmem.ea.maintain.action.maintain.EaBodyDelLineAction">
+		<property name="model" ref="manageAppModel" />
+	</bean>
+	<bean id="vabodyPasteLineAction" class="nc.ui.pubapp.uif2app.actions.BodyPasteLineAction" >
+		<property name="clearItems">
+			<list>
+				<value>pk_srm_ea_va</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="vabodyPasteToTailAction" class="nc.ui.pubapp.uif2app.actions.BodyPasteToTailAction" >
+		<property name="clearItems">
+			<list>
+				<value>pk_srm_ea_va</value>
+			</list>
+		</property>
+	</bean>	
+	
+
+	<!-- 评估指标页签 单据表体行菜单按钮动作 -->
+	<bean id="eibodyInsertLineAction" class="nc.ui.pubapp.uif2app.actions.BodyInsertLineAction" />
+	<bean id="eibodyAddLineAction" class="nc.ui.pubapp.uif2app.actions.BodyAddLineAction">
+		<property name="model" ref="manageAppModel" />
+	</bean>
+	<bean id="eibodyCopyLineAction" class="nc.ui.pubapp.uif2app.actions.BodyCopyLineAction">
+		<property name="model" ref="manageAppModel" />
+	</bean>	
+	<bean id="eibodyPasteLineAction" class="nc.ui.pubapp.uif2app.actions.BodyPasteLineAction" />
+	<bean id="eibodyPasteToTailAction" class="nc.ui.pubapp.uif2app.actions.BodyPasteToTailAction" />
+	<bean id="eibodyDelLineAction"
+		class="nc.ui.srmem.ea.maintain.action.maintain.EaBodyDelLineAction">
+		<property name="model" ref="manageAppModel" />
+	</bean>
+	<bean id="bodyReSortAction"
+		class="nc.ui.pubapp.uif2app.actions.RearrangeRowNoBodyLineAction" />
+	
+	<bean id="bodyDelLineAction" class="nc.ui.pubapp.uif2app.actions.BodyDelLineAction">
+		<property name="model" ref="manageAppModel" />
+	</bean>
+	<bean id="bodyInsertLineAction" class="nc.ui.pubapp.uif2app.actions.BodyInsertLineAction" />
+	<bean id="bodyAddLineAction" class="nc.ui.pubapp.uif2app.actions.BodyAddLineAction">
+		<property name="model" ref="manageAppModel" />
+	</bean>
+	<bean id="bodyCopyLineAction" class="nc.ui.pubapp.uif2app.actions.BodyCopyLineAction">
+		<property name="model" ref="manageAppModel" />
+	</bean>	
+	<bean id="bodyPasteLineAction" class="nc.ui.pubapp.uif2app.actions.BodyPasteLineAction" >
+	<property name="clearItems">
+			<list>
+				<value>pk_srm_ea_va</value>
+				<value>pk_srm_ea_eg</value>
+				<value>pk_srm_ea_eo</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="bodyPasteToTailAction" class="nc.ui.pubapp.uif2app.actions.BodyPasteToTailAction" >
+		<property name="clearItems">
+			<list>
+				<value>pk_srm_ea_va</value>
+				<value>pk_srm_ea_eg</value>
+				<value>pk_srm_ea_eo</value>
+			</list>
+		</property>
+	</bean>	
+	<bean id="bodyZoomAction" class="nc.ui.pubapp.uif2app.actions.DefaultBodyZoomAction">
+		<property name="pos" value="1" />
+	</bean>
+
+</beans>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!--转单参照单据信息 -->
+	<bean id="refInfo" class="nc.ui.pubapp.billref.src.RefInfo">
+    <property name="headVO">
+      <bean class="nc.vo.ic.m45.entity.PurchaseInHeadVO">
+      </bean>
+    </property>
+    <property name="bodyVO">
+      <bean class="nc.vo.ic.m45.entity.PurchaseInBodyVO">
+      </bean>
+    </property>
+    <property name="billVO">
+      <bean class="nc.vo.ic.m45.entity.PurchaseInVO">
+      </bean>
+    </property>
+    <property name="viewVO">
+      <bean class="nc.vo.ic.m45.entity.PurchaseInViewVO">
+      </bean>
+    </property>
+		<property name="billNodeKey" value="45TO4S"/>
+		<property name="billViewNodeKey" value="45TO4S"/>
+		<property name="sourcevoPkName" value="csourcebillhid"/>
+		<property name="sourcevoBillNOName" value="vsourcebillcode"/>
+		<property name="queryService">
+			<bean class="nc.ui.to.scm45.billref.srm4s.QueryServiceFor45"/>
+		</property>
+	</bean>
+</beans>
