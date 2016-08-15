@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" output="ic/classes" path="ic/src/public"/>
+	<classpathentry kind="src" output="ic/classes" path="ic/src/client"/>
+	<classpathentry kind="src" output="ic/classes" path="ic/src/private"/>
+	<classpathentry kind="src" output="ic/classes" path="ic/src/test"/>
+	<classpathentry kind="src" output="ic/classes" path="ic/resources"/>
+	<classpathentry kind="src" output="mmpac/classes" path="mmpac/src/public"/>
+	<classpathentry kind="src" output="mmpac/classes" path="mmpac/src/client"/>
+	<classpathentry kind="src" output="mmpac/classes" path="mmpac/src/private"/>
+	<classpathentry kind="src" output="mmpac/classes" path="mmpac/src/test"/>
+	<classpathentry kind="src" output="mmpac/classes" path="mmpac/resources"/>
+	<classpathentry kind="src" output="to/classes" path="to/src/public"/>
+	<classpathentry kind="src" output="to/classes" path="to/src/client"/>
+	<classpathentry kind="src" output="to/classes" path="to/src/private"/>
+	<classpathentry kind="src" output="to/classes" path="to/src/test"/>
+	<classpathentry kind="src" output="to/classes" path="to/resources"/>
 	<classpathentry kind="src" output="dm/classes" path="dm/src/public"/>
 	<classpathentry kind="src" output="dm/classes" path="dm/src/client"/>
 	<classpathentry kind="src" output="dm/classes" path="dm/src/private"/>
@@ -50,14 +65,14 @@
 	<classpathentry exported="true" kind="con" path="com.yonyou.studio.udt.core.container/Module_Private_Library"/>
 	<classpathentry exported="true" kind="con" path="com.yonyou.studio.udt.core.container/Module_Lang_Library"/>
 	<classpathentry exported="true" kind="con" path="com.yonyou.studio.udt.core.container/Generated_EJB"/>
-	<classpathentry exported="true" kind="con" path="com.yonyou.ria.g2.container/Ant_Library"/>
-	<classpathentry exported="true" kind="con" path="com.yonyou.ria.g2.container/Product_Common_Library"/>
-	<classpathentry exported="true" kind="con" path="com.yonyou.ria.g2.container/Middleware_Library"/>
-	<classpathentry exported="true" kind="con" path="com.yonyou.ria.g2.container/Framework_Library"/>
-	<classpathentry exported="true" kind="con" path="com.yonyou.ria.g2.container/Module_Public_Library"/>
-	<classpathentry exported="true" kind="con" path="com.yonyou.ria.g2.container/Module_Client_Library"/>
-	<classpathentry exported="true" kind="con" path="com.yonyou.ria.g2.container/Module_Private_Library"/>
-	<classpathentry exported="true" kind="con" path="com.yonyou.ria.g2.container/Module_Lang_Library"/>
-	<classpathentry exported="true" kind="con" path="com.yonyou.ria.g2.container/Generated_EJB"/>
+	<classpathentry kind="con" path="com.yonyou.ria.g2.container/Ant_Library"/>
+	<classpathentry kind="con" path="com.yonyou.ria.g2.container/Product_Common_Library"/>
+	<classpathentry kind="con" path="com.yonyou.ria.g2.container/Middleware_Library"/>
+	<classpathentry kind="con" path="com.yonyou.ria.g2.container/Framework_Library"/>
+	<classpathentry kind="con" path="com.yonyou.ria.g2.container/Module_Public_Library"/>
+	<classpathentry kind="con" path="com.yonyou.ria.g2.container/Module_Client_Library"/>
+	<classpathentry kind="con" path="com.yonyou.ria.g2.container/Module_Private_Library"/>
+	<classpathentry kind="con" path="com.yonyou.ria.g2.container/Module_Lang_Library"/>
+	<classpathentry kind="con" path="com.yonyou.ria.g2.container/Generated_EJB"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
